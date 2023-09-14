@@ -10,7 +10,7 @@ package GiovanChristoffelSihombingJBusRS;
 public class JBus
 {
     public static void main(String args[]){
-        
+        System.out.println(getOriginalPrice(1000, 0.0f));
     }
     
     public static int getBusId(){
@@ -31,7 +31,7 @@ public class JBus
     public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
         if (beforeDiscount > afterDiscount){
             float res = ((float)beforeDiscount - (float)afterDiscount)/(float)beforeDiscount;
-            return res; 
+            return res*100; 
         } else {
             return 0.0f;
         }
@@ -40,15 +40,15 @@ public class JBus
     }
     
     public static int getDiscountedPrice(int price, float discountPercentage){
-        return price - (int)((float)price * discountPercentage);   
+        float res = (float)price * (discountPercentage/100);
+        return price - (int)res; 
         
         // dah benar
     }
     
     public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-        float minDiscount = (float)1 - discountPercentage;
-        float totalPrice = (float)discountedPrice/minDiscount;
-        return (int)totalPrice;
+        float res = (float)discountedPrice / (1 - (discountPercentage/100));
+        return (int)res;
         
         // dah benar
     }
