@@ -1,7 +1,28 @@
 package GiovanChristoffelSihombingJBusRS;
 
 public class Rating {
-    public Rating(){
-
+    private long count;
+    private long total;
+    
+    public Rating(long count, long total){
+        this.count = count;
+        this.total = total;
+    }
+    
+    void insert(int rating){
+        this.total += rating;
+        this.total += 1;
+    }
+    
+    long getTotal(){
+        return this.total;
+    }
+    
+    long getCount(){
+        return this.count;
+    }
+    
+    double getAverage(){
+        return (double)(getTotal()/getCount());
     }
 }

@@ -10,10 +10,21 @@ package GiovanChristoffelSihombingJBusRS;
 public class JBus
 {
     public static void main(String args[]){
-        System.out.println(getDiscountedPrice(1000, 120));
+        Bus testbus = createBus();
+        System.out.println(testbus.name);
+        System.out.println(testbus.facility);
+        System.out.println(testbus.price.price);
+        System.out.println(testbus.capacity);
     }
     
-    public static int getBusId(){
+    public static Bus createBus(){
+        Price newprice = new Price((double)750000, (double)10000);
+        Bus bus = new Bus("Netlab Bus", Facility.WIFI, newprice, 25);
+        
+        return bus;
+    }
+    
+    /*public static int getBusId(){
         return 0;
         // dah benar
     }
@@ -75,4 +86,5 @@ public class JBus
         
         // dah benar
     }
+    */
 }
