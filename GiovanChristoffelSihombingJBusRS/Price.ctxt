@@ -1,16 +1,14 @@
 #BlueJ class context
 comment0.target=Price
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Price\ here.\r\n\r\n\ @author\ Giovan\ Christoffel\ Sihombing\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-comment2.params=_price
-comment2.target=Price(double)
-comment3.params=_price\ _discount
-comment3.target=Price(double,\ int)
-comment4.params=_price\ _rebate
-comment4.target=Price(double,\ double)
+comment1.params=_price
+comment1.target=Price(double)
+comment2.params=_price\ _discount
+comment2.target=Price(double,\ int)
+comment3.params=_price\ _rebate
+comment3.target=Price(double,\ double)
+comment4.params=
+comment4.target=double\ getDiscountPrice()
 comment5.params=
-comment5.target=double\ getDiscountPrice()
-comment6.params=
-comment6.target=double\ getRebatedPrice()
-numComments=7
+comment5.target=double\ getRebatedPrice()
+numComments=6

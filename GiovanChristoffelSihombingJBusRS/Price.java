@@ -10,11 +10,6 @@ public class Price {
     double rebate;
     double price;
     int discount;
-
-    public static void main(String args[]){
-        Price harga = new Price(1000.0, 10);
-        System.out.println(harga.getDiscountPrice());
-    }
     
     public Price(double _price){
         this.price = _price;
@@ -38,17 +33,17 @@ public class Price {
         }
         
         double discountPrice = price * (double)discount / 100;
-        price -= discountPrice;
-        return price;
+        double res = price - discountPrice;
+        return res;
     }
     
     private double getRebatedPrice(){
-        price -= rebate;
-        if(price < 0){
-            price = 0;
+        double res = price - rebate;
+        if(res < 0){
+            res = 0;
         }
         
-        return price;
+        return res;
     }
     
     
