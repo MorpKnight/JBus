@@ -11,7 +11,7 @@ public class Rating {
     
     void insert(int rating){
         this.total += rating;
-        this.total += 1;
+        this.count += 1;
     }
     
     long getTotal(){
