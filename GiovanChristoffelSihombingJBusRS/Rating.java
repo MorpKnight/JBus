@@ -4,25 +4,30 @@ public class Rating {
     private long count;
     private long total;
     
-    public Rating(long count, long total){
-        this.count = count;
-        this.total = total;
+    public Rating(){
+        this.count = 0;
+        this.total = 0;
     }
     
-    void insert(int rating){
+    public void insert(int rating){
         this.total += rating;
         this.count += 1;
     }
     
-    long getTotal(){
+    public long getTotal(){
         return this.total;
     }
     
-    long getCount(){
+    public long getCount(){
         return this.count;
     }
     
-    double getAverage(){
-        return (double)(getTotal()/getCount());
+    public double getAverage(){
+        try {
+            double res = (double)(getTotal()/getCount());
+            return res;
+        } catch (ArithmeticException e){
+            return 0.0;
+        }
     }
 }
