@@ -9,10 +9,10 @@ package GiovanChristoffelSihombingJBusRS;
  */
 public class Bus
 {
-    int capacity;
-    Facility facility;
-    String name;
-    Price price;
+    public int capacity;
+    public Facility facility;
+    public String name;
+    public Price price;
     
     public Bus(String _name, Facility _facility, Price _price, int _capacity){
         this.name = _name;
