@@ -7,7 +7,7 @@ package GiovanChristoffelSihombingJBusRS;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Voucher
+public class Voucher extends Serializable
 {
     public String name;
     private boolean used;
@@ -16,7 +16,8 @@ public class Voucher
     public int code;
     public Type type;
     
-    public Voucher(String _name, int _code, Type _type, double _minimum, double _cut){
+    public Voucher(int id, String _name, int _code, Type _type, double _minimum, double _cut){
+        super(id);
         this.name = _name;
         this.code = _code;
         this.minimum = _minimum;
@@ -30,21 +31,28 @@ public class Voucher
     }
 
     public boolean canApply(Price price){
-        if(price.price >= this.minimum && this.used == false){
+        if(price.price >= this.minimum && !this.used){
             return true;
         }
         return false;
     }
 
     public double apply(Price price){
-        if(canApply(price) == true){
-            this.used = true;
-            if(this.type == Type.DISCOUNT){
-                return price.price - (price.price * this.cut / 100);
-            } else if (this.type == Type.REBATE){
-                return price.price - this.cut;
-            }
+        if(!canApply(price)){
+            return price.price;
         }
-        return price.price;
+
+        this.used = true;
+        if(this.type == Type.DISCOUNT){
+            if(this.cut > 100){
+                return 0;
+            }else{
+                return price.price - (price.price * (this.cut / 100));
+            }
+        } else if(this.type == Type.REBATE){
+            return price.price - this.cut;
+        } else {
+            return price.price;
+        }
     }
 }

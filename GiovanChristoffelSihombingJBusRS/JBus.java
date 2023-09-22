@@ -10,16 +10,17 @@ package GiovanChristoffelSihombingJBusRS;
 public class JBus
 {
     public static void main(String args[]){
-        Bus testbus = createBus();
-        System.out.println(testbus.name);
-        System.out.println(testbus.facility);
-        System.out.println(testbus.price.price);
-        System.out.println(testbus.capacity);
+        Payment testPayment = new Payment(1, 1, 1, "A", 1, "A", "A");
+        Invoice testInvoice = new Invoice(2, 2, 2, "B");
+        Station testStation = new Station(3, "C", City.DEPOK);
+        System.out.println(testPayment.print());
+        System.out.println(testInvoice.print());
+        System.out.println(testStation.print());
     }
     
     public static Bus createBus(){
         Price newprice = new Price((double)750000, (double)10000);
-        Bus bus = new Bus("Netlab Bus", Facility.WIFI, newprice, 25);
+        Bus bus = new Bus(1, "Bus", 50, Facility.AC, newprice);
         
         return bus;
     }
