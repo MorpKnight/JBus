@@ -14,7 +14,7 @@ public class Bus extends Serializable
     public String name;
     public Price price;
     
-    public Bus(int id, String name, int capacity, Facility facility, Price price) {
+    public Bus(int id, String name, Facility facility, Price price, int capacity) {
         super(id);
         this.name = name;
         this.capacity = capacity;

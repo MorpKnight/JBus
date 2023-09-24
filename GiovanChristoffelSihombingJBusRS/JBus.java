@@ -20,7 +20,7 @@ public class JBus
     
     public static Bus createBus(){
         Price newprice = new Price((double)750000, (double)10000);
-        Bus bus = new Bus(1, "Bus", 50, Facility.AC, newprice);
+        Bus bus = new Bus(1, "Bus", Facility.AC, newprice, 50);
         
         return bus;
     }
