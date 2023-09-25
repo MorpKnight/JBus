@@ -5,4 +5,6 @@ comment1.params=_price
 comment1.target=Price(double)
 comment2.params=_price\ _rebate
 comment2.target=Price(double,\ double)
-numComments=3
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

@@ -11,14 +11,16 @@ public class Station extends Serializable
 {
     public City city;
     public String stationName;
+    public String address;
     
-    public Station(int id, String stationName, City city){
+    public Station(int id, String stationName, City city, String address){
         super(id);
         this.city = city;
         this.stationName = stationName;
+        this.address = address;
     }
     
-    public String print(){
-        return ("id: " + this.id + "\ncity: " + this.city + "\nstationName: " + this.stationName);
+    public String toString(){
+        return ("id: " + this.id + "\ncity: " + this.city + "\nstationName: " + this.stationName + "\naddress: " + this.address);
     }
 }
