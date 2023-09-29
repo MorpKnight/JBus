@@ -7,4 +7,5 @@ comment2.params=_price\ _rebate
 comment2.target=Price(double,\ double)
 comment3.params=
 comment3.target=java.lang.String\ toString()
+comment3.text=\r\n\ The\ toString()\ function\ returns\ a\ string\ representation\ of\ the\ price\ and\ rebate\ values.\r\n\ \r\n\ @return\ The\ method\ is\ returning\ a\ string\ that\ contains\ the\ price\ and\ rebate\ values.\r\n
 numComments=4

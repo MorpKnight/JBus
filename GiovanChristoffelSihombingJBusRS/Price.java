@@ -29,6 +29,11 @@ public class Price {
         // this.discount = 0;
     }
     
+    /**
+     * The toString() function returns a string representation of the price and rebate values.
+     * 
+     * @return The method is returning a string that contains the price and rebate values.
+     */
     public String toString(){
         return ("price: " + this.price + "\nrebate: " + this.rebate);
     }

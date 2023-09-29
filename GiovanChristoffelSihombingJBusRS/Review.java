@@ -18,6 +18,14 @@ public class Review extends Serializable
         this.desc = desc;
     }
     
+
+    /**
+     * The toString() function returns a string representation of the review object, including its id,
+     * date, and description.
+     * 
+     * @return The method is returning a string representation of the review object, which includes the
+     * review id, date, and description.
+     */
     public String toString(){
         return ("Review id: " + this.id + "\ndate: " + this.date + "\ndesc: " + this.desc);
     }

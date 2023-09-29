@@ -5,4 +5,5 @@ comment1.params=id\ stationName\ city\ address
 comment1.target=Station(int,\ java.lang.String,\ City,\ java.lang.String)
 comment2.params=
 comment2.target=java.lang.String\ toString()
+comment2.text=\r\n\ The\ toString()\ function\ returns\ a\ string\ representation\ of\ an\ object's\ id,\ city,\ stationName,\r\n\ and\ address.\r\n\ \r\n\ @return\ The\ toString\ method\ is\ returning\ a\ string\ representation\ of\ an\ object,\ which\ includes\r\n\ the\ id,\ city,\ stationName,\ and\ address\ properties\ of\ the\ object.\r\n
 numComments=3

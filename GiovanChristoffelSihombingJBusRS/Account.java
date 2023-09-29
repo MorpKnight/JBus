@@ -7,7 +7,7 @@ package GiovanChristoffelSihombingJBusRS;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Account extends Serializable
+public class Account extends Serializable implements FileParser
 {
     // instance variables - replace the example below with your own
     public String email;
@@ -21,7 +21,22 @@ public class Account extends Serializable
         this.password = password;
     }
     
+    /**
+     * The toString() function mengembalikan string yang merepresentasikan objek account.
+     * 
+     * @return toString() method mengembalikan string yang merepresentasikan objek account, termasuk id akun, email, nama, dan password.
+     */
     public String toString(){
         return ("Account Id: " + this.id + "\nemail: " + this.email + "\nname: " + this.name + "\npassword: " + this.password);
+    }
+
+    @Override
+    public boolean read(String x){
+        return true;
+    }
+
+    @Override
+    public Object write(){
+        return null;
     }
 }
