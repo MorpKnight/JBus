@@ -54,7 +54,7 @@ public class Payment extends Invoice
      * id payment, id pembeli, id renter, waktu, id bus, tanggal keberangkatan, dan kursi bus.
      */
     public String getDepartureInfo(){
-        return ("id: " + this.id + "\nbuyerId: " + this.buyerId + "\nrenterId: " + this.renterId + "\nbusId: " + this.busId + "\ndepartureDate: " + new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss").format(this.departureDate.getTime()) + "\nbusSeat: " + this.busSeat);
+        return ("Payment Id: " + this.id + " Buyer Id: " + this.buyerId + " Renter Id: " + this.renterId + " busId: " + this.busId + " Departure Date: " + new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss").format(this.departureDate.getTime()) + " Bus Seat: " + this.busSeat);
     }
     
     public int getBusId(){
