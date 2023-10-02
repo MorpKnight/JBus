@@ -1,10 +1,10 @@
 package GiovanChristoffelSihombingJBusRS;
 
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 public class Invoice extends Serializable
 {
-    public Calendar time;
+    public Timestamp time;
     public int buyerId;
     public int renterId;
     public BusRating rating;
@@ -22,8 +22,8 @@ public class Invoice extends Serializable
         super(id);
         this.buyerId = buyerId;
         this.renterId = renterId;
-        this.time = Calendar.getInstance();
         this.rating = BusRating.NONE;
+        this.time = Timestamp.from(java.time.Instant.now());
         this.status = PaymentStatus.WAITING;
     }
     
@@ -31,8 +31,8 @@ public class Invoice extends Serializable
         super(id);
         this.renterId = renter.id;
         this.buyerId = buyer.id;
-        this.time = Calendar.getInstance();
         this.rating = BusRating.NONE;
+        this.time = Timestamp.from(java.time.Instant.now());
         this.status = PaymentStatus.WAITING;
     }
     

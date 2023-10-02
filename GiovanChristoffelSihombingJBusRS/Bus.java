@@ -1,9 +1,9 @@
 package GiovanChristoffelSihombingJBusRS;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
+// import java.text.SimpleDateFormat;
 
 /**
  * Write a description of class Bus here.
@@ -49,25 +49,25 @@ public class Bus extends Serializable implements FileParser {
                 + this.departure.stationName + "\narrival: " + this.arrival.stationName + "\nbusType: " + this.busType);
     }
 
-    public void addSchedule(Calendar calendar){
-        schedules.add(new Schedule(calendar, capacity));
+    public void addSchedule(Timestamp calendar){
+        this.schedules.add(new Schedule(calendar, this.capacity));
     }
 
-    public void printSchedule(Schedule schedule){
-        System.out.println("Tanggal keberangkatan: " + new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss").format(schedule.departureSchedule.getTime()));
-        System.out.println("Daftar kursi dan ketersediaannya: " );
-        int i = 0;
-        for(String seat : schedule.seatAvailability.keySet()){
-            System.out.print(seat + " : " + schedule.seatAvailability.get(seat) + " ");
-            i += 1;
-            if(i == 4){
-                System.out.println();
-                i = 0;
-            }
-        }
+    // public void printSchedule(Schedule schedule){
+    //     System.out.println("Tanggal keberangkatan: " + new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss").format(schedule.departureSchedule.getTime()));
+    //     System.out.println("Daftar kursi dan ketersediaannya: " );
+    //     int i = 0;
+    //     for(String seat : schedule.seatAvailability.keySet()){
+    //         System.out.print(seat + " : " + schedule.seatAvailability.get(seat) + " ");
+    //         i += 1;
+    //         if(i == 4){
+    //             System.out.println();
+    //             i = 0;
+    //         }
+    //     }
         
-        System.out.println();
-    }
+    //     System.out.println();
+    // }
 
     @Override
     public boolean read(String x){
