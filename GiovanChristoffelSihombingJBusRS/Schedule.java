@@ -21,9 +21,9 @@ public class Schedule
         initializeSeatAvailability(numberOfSeats);
     }
 
-    private void initializeSeatAvailability(int numberOfSeats){
-        for (int seatNumber = 1; seatNumber <= numberOfSeats; seatNumber++) {
-            String sn = seatNumber < 10 ? "0"+seatNumber : ""+seatNumber;
+    private void initializeSeatAvailability(int seat){
+        for (int i = 1; i <= seat; i++) {
+            String sn = i < 10 ? "0"+i : ""+i;
             seatAvailability.put("RS" + sn, true);
         }
     }
