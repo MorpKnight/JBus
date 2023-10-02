@@ -33,14 +33,14 @@ public class Payment extends Invoice
         super(id, buyerId, renterId);
         this.busId = busId;
         this.busSeat = busSeat;
-        this.departureDate = departureDate;
+        this.departureDate = new Timestamp(departureDate.getTime() + 172800000);
     }
 
     public Payment(int id, Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate){
         super(id, buyer, renter);
         this.busId = busId;
         this.busSeat = busSeat;
-        this.departureDate = departureDate;
+        this.departureDate = new Timestamp(departureDate.getTime() + 172800000);
     }
     
     /**
