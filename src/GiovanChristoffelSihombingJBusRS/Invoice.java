@@ -19,20 +19,20 @@ public class Invoice extends Serializable
     }
     
     protected Invoice(int id, int buyerId, int renterId){
-        super(id);
+        super();
         this.buyerId = buyerId;
         this.renterId = renterId;
         this.rating = BusRating.NONE;
-        this.time = Timestamp.from(java.time.Instant.now());
+        this.time = new Timestamp(System.currentTimeMillis());
         this.status = PaymentStatus.WAITING;
     }
     
     public Invoice(int id, Account buyer, Renter renter){
-        super(id);
+        super();
         this.renterId = renter.id;
         this.buyerId = buyer.id;
         this.rating = BusRating.NONE;
-        this.time = Timestamp.from(java.time.Instant.now());
+        this.time = new Timestamp(System.currentTimeMillis());
         this.status = PaymentStatus.WAITING;
     }
     

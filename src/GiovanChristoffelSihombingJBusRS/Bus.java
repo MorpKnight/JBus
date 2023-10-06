@@ -23,7 +23,7 @@ public class Bus extends Serializable implements FileParser {
 
     public Bus(int id, String name, Facility facility, Price price, int capacity, BusType busType, City city,
             Station departure, Station arrival) {
-        super(id);
+        super();
         this.name = name;
         this.capacity = capacity;
         this.facility = facility;
@@ -71,7 +71,7 @@ public class Bus extends Serializable implements FileParser {
 
     @Override
     public boolean read(String x){
-        return true;
+        return false;
     }
 
     @Override

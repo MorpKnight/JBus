@@ -18,20 +18,27 @@ public class Validate
         // nilainya lebih dari nilai value.
 
         ArrayList<Double> result = new ArrayList<Double>();
-        if(less == true){
-            for(int i = 0; i < list.length; i++){
-                if(list[i].price <= value){
-                    result.add(list[i].price);
-                }
-            }
-        }else{
-            for(int i = 0; i < list.length; i++){
-                if(list[i].price > value){
-                    result.add(list[i].price);
-                }
+//        if(less == true){
+//            for(int i = 0; i < list.length; i++){
+//                if(list[i].price <= value){
+//                    result.add(list[i].price);
+//                }
+//            }
+//        }else{
+//            for(int i = 0; i < list.length; i++){
+//                if(list[i].price > value){
+//                    result.add(list[i].price);
+//                }
+//            }
+//        }
+
+        for(Price price : list){
+            if(less && price.price <= value){
+                result.add(price.price);
+            } else if (!less && price.price >  value){
+                result.add(price.price);
             }
         }
-
         return result;
     }
 }

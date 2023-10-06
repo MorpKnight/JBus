@@ -17,7 +17,7 @@ public class Voucher extends Serializable implements FileParser
     public Type type;
     
     public Voucher(int id, String _name, int _code, Type _type, double _minimum, double _cut){
-        super(id);
+        super();
         this.name = _name;
         this.code = _code;
         this.minimum = _minimum;
@@ -70,14 +70,14 @@ public class Voucher extends Serializable implements FileParser
             }
         } else if(this.type == Type.REBATE){
             return price.price - this.cut;
-        } else {
-            return price.price;
         }
+
+        return price.price;
     }
     
     @Override
     public boolean read(String x){
-        return true;
+        return false;
     }
 
     @Override
