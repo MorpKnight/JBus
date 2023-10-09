@@ -48,7 +48,7 @@ public class JBus
         System.out.println(Payment.makeBooking(t2, List.of("RS07", "RS08"), b)? msgSuccess : msgFailed);
         // valid date, valid seat = Booking Success
         Timestamp t3 = Timestamp.valueOf("2023-7-20 12:00:00");
-        System.out.println("Make booking at July 20, 2023 12:00:00 Seats: RS1 RS2");
+        System.out.println("Make booking at July 20, 2023 12:00:00 Seats: RS01 RS02");
         System.out.println(Payment.makeBooking(t3, List.of("RS01", "RS02"), b)? msgSuccess : msgFailed);
         // valid date, book the same seat = Booking Failed
         System.out.println("Make booking at July 20, 2023 12:00:00 Seat RS01");
