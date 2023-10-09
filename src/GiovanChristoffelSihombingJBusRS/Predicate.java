@@ -1,5 +1,5 @@
 package GiovanChristoffelSihombingJBusRS;
 
 public interface Predicate<T> {
-    boolean Predicate(T t);
+    public boolean Predicate(T t);
 }

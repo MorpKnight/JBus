@@ -1,9 +1,5 @@
 package GiovanChristoffelSihombingJBusRS;
 
-import com.sun.source.tree.LiteralTree;
-
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -157,5 +153,34 @@ public class Algorithm {
         }
 
         return null;
+    }
+
+    public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred){
+        final Iterator<T> iterator = Arrays.stream(array).iterator();
+        return paginate(iterator, page, pageSize, pred);
+    }
+
+    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred){
+        final Iterator<T> iterator = iterable.iterator();
+        return paginate(iterator, page, pageSize, pred);
+    }
+
+    public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred){
+        List<T> list = new ArrayList<T>();
+        int counter = 0;
+        int start = page * pageSize;
+        int end = start + pageSize;
+
+        while(iterator.hasNext()){
+            T current = iterator.next();
+            if(counter >= start && counter < end){
+                if(pred.Predicate(current)){
+                    list.add(current);
+                }
+            }
+            counter++;
+        }
+
+        return list;
     }
 }

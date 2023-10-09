@@ -3,6 +3,7 @@ package GiovanChristoffelSihombingJBusRS;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,9 +33,23 @@ public class Schedule
         return seatAvailability.containsKey(seat) && seatAvailability.get(seat);
     }
 
+    public boolean isSeatAvailable(List<String> seats){
+        for(String seat: seats){
+            isSeatAvailable(seat);
+        }
+
+        return false;
+    }
+
     public void bookSeat(String seat){
         if(seatAvailability.containsKey(seat)){
             seatAvailability.put(seat, false);
+        }
+    }
+
+    public void bookSeat(List<String> seats){
+        for(String seat: seats){
+            bookSeat(seat);
         }
     }
 
@@ -57,5 +72,20 @@ public class Schedule
             currentSeat++;
         }
         System.out.println("\n");
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDepartureSchedule = dateFormat.format(this.departureSchedule);
+        int totalSeats = this.seatAvailability.size();
+        int seatsTaken = 0;
+        for (String seat : this.seatAvailability.keySet()) {
+            if (!this.seatAvailability.get(seat)) {
+                seatsTaken++;
+            }
+        }
+        return "Schedule\t: " + formattedDepartureSchedule + "\n" +
+                "Occupied\t: " + seatsTaken + "/" + totalSeats;
     }
 }

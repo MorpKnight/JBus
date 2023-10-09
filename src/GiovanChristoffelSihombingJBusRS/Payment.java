@@ -2,6 +2,7 @@ package GiovanChristoffelSihombingJBusRS;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Write a description of class Payment here.
@@ -62,9 +63,51 @@ public class Payment extends Invoice
         return sdf.format(time);
     }
 
-    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus){
+//    public static boolean isAvailable(Timestamp departureSchedule, String seat, Bus bus){
+//        for(Schedule schedule : bus.schedules){
+//            if(schedule.isSeatAvailable(seat) && schedule.departureSchedule.equals(departureSchedule)){
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+
+    public static Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
         for(Schedule schedule : bus.schedules){
             if(schedule.isSeatAvailable(seat) && schedule.departureSchedule.equals(departureSchedule)){
+                return schedule;
+            }
+        }
+
+        return null;
+    }
+
+    public static Schedule availableSchedule(Timestamp departureSchedule, List<String> seats, Bus bus){
+        for(Schedule schedule : bus.schedules){
+            if(schedule.isSeatAvailable(seats) && schedule.departureSchedule.equals(departureSchedule)){
+                return schedule;
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
+        // if(isAvailable(departureSchedule, seat, bus)){
+        //     for(Schedule schedule : bus.schedules){
+        //         if(schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)){
+        //             schedule.bookSeat(seat);
+        //             return true;
+        //         }
+        //     }
+        // }
+
+        // return false;
+        Schedule schedule = availableSchedule(departureSchedule, seat, bus);
+        for(Schedule sch : bus.schedules){
+            if(sch.departureSchedule.equals(departureSchedule) && sch.isSeatAvailable(seat)){
+                sch.bookSeat(seat);
                 return true;
             }
         }
@@ -72,16 +115,13 @@ public class Payment extends Invoice
         return false;
     }
 
-    public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
-        if(isAvailable(departureSchedule, seat, bus)){
-            for(Schedule schedule : bus.schedules){
-                if(schedule.departureSchedule.equals(departureSchedule) && schedule.isSeatAvailable(seat)){
-                    schedule.bookSeat(seat);
-                    return true;
-                }
+    public static boolean makeBooking(Timestamp departureSchedule, List<String> seats, Bus bus){
+        for(String seat : seats){
+            if(!makeBooking(departureSchedule, seat, bus)){
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 }
