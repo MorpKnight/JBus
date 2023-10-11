@@ -104,7 +104,6 @@ public class Payment extends Invoice
         // }
 
         // return false;
-        Schedule schedule = availableSchedule(departureSchedule, seat, bus);
         for(Schedule sch : bus.schedules){
             if(sch.departureSchedule.equals(departureSchedule) && sch.isSeatAvailable(seat)){
                 sch.bookSeat(seat);
