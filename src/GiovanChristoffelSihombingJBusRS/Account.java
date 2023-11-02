@@ -7,7 +7,7 @@ package GiovanChristoffelSihombingJBusRS;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Account extends Serializable implements FileParser
+public class Account extends Serializable
 {
     // instance variables - replace the example below with your own
     public String email;
@@ -28,15 +28,5 @@ public class Account extends Serializable implements FileParser
      */
     public String toString(){
         return ("Account Id: " + this.id + "\nemail: " + this.email + "\nname: " + this.name + "\npassword: " + this.password);
-    }
-
-    @Override
-    public boolean read(String x){
-        return false;
-    }
-
-    @Override
-    public Object write(){
-        return this;
     }
 }

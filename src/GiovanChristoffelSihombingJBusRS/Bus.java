@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Bus extends Serializable implements FileParser {
+public class Bus extends Serializable {
     public int capacity;
     public Facility facility;
     public String name;
@@ -50,32 +50,17 @@ public class Bus extends Serializable implements FileParser {
     }
 
     public void addSchedule(Timestamp calendar){
-        this.schedules.add(new Schedule(calendar, this.capacity));
-    }
-
-    // public void printSchedule(Schedule schedule){
-    //     System.out.println("Tanggal keberangkatan: " + new SimpleDateFormat("MMMM dd, yyyy HH:mm:ss").format(schedule.departureSchedule.getTime()));
-    //     System.out.println("Daftar kursi dan ketersediaannya: " );
-    //     int i = 0;
-    //     for(String seat : schedule.seatAvailability.keySet()){
-    //         System.out.print(seat + " : " + schedule.seatAvailability.get(seat) + " ");
-    //         i += 1;
-    //         if(i == 4){
-    //             System.out.println();
-    //             i = 0;
-    //         }
-    //     }
-        
-    //     System.out.println();
-    // }
-
-    @Override
-    public boolean read(String x){
-        return false;
-    }
-
-    @Override
-    public Object write(){
-        return null;
+        try {
+            for(Schedule existSchedule: this.schedules){
+                if(existSchedule.departureSchedule.equals(calendar)){
+                    System.out.println("Jadwal duplikat");
+                    return;
+                }
+            }
+            this.schedules.add(new Schedule(calendar, this.capacity));
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+//        this.schedules.add(new Schedule(calendar, this.capacity));
     }
 }

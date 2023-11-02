@@ -22,17 +22,26 @@ public class JBus
 {
     public static void main(String[] args) {
         // TP MODUL 6
-        String filePath = "D:\\Programming\\Java\\JBus\\data\\station.json";
-        Gson gson = new Gson();
+        // String filePath = "D:\\Programming\\Java\\JBus\\data\\station.json";
+        // Gson gson = new Gson();
+
+        // try {
+        //     BufferedReader buffer = new BufferedReader(new FileReader(filePath));
+        //     List<Station> stationjson = gson.fromJson(buffer, new TypeToken<List<Station>>() {}.getType());
+        //     stationjson.forEach(e -> System.out.println(e.toString()));
+        //     System.out.println();
+        //     buffer.close();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
 
         try {
-            BufferedReader buffer = new BufferedReader(new FileReader(filePath));
-            List<Station> stationjson = gson.fromJson(buffer, new TypeToken<List<Station>>() {}.getType());
-            stationjson.forEach(e -> System.out.println(e.toString()));
-            System.out.println();
-            buffer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            String filePath = "D:\\Programming\\Java\\JBus\\data\\buses.json";
+            JsonTable<Bus> buses = new JsonTable<>(Bus.class, filePath);
+            List<Bus> filteredBus = filterByDeparture(buses, City.JAKARTA, 1, 10);
+            filteredBus.forEach(bus -> System.out.println(bus.toString()));
+        } catch (Throwable t){
+            t.printStackTrace();
         }
     }
 
@@ -131,6 +140,12 @@ public class JBus
 //        System.out.println(integerAbove);
 //    }
 //
+
+    public static List<Bus> filterByDeparture(List<Bus> buses, City departure, int page, int pageSize){
+        // return all Bus with departure == departure, and do pagination
+        return Algorithm.paginate(buses, page, pageSize, b -> b.departure.city.equals(departure));
+    }
+
     public static Bus createBus() {
         Price price = new Price(750000, 5);
         Bus bus = new Bus("Netlab Bus", Facility.LUNCH, price, 25, BusType.REGULER, City.BANDUNG, new Station("Depok Terminal", City.DEPOK, "Jl. Margonda Raya"), new Station("Halte UI", City.JAKARTA, "Universitas Indonesia"));
