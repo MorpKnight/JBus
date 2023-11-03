@@ -46,7 +46,7 @@ public class Bus extends Serializable {
     public String toString() {
         return ("Bus Id: " + this.id + "\nname: " + this.name + "\ncapacity: " + this.capacity + "\nfacility: "
                 + this.facility + "\n" + this.price + "\ncity: " + this.city + "\ndeparture: "
-                + this.departure.stationName + "\narrival: " + this.arrival.stationName + "\nbusType: " + this.busType);
+                + this.departure.city + "\narrival: " + this.arrival.city + "\nbusType: " + this.busType + "\n");
     }
 
     public void addSchedule(Timestamp calendar){
