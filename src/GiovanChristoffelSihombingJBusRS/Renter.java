@@ -1,6 +1,9 @@
 package GiovanChristoffelSihombingJBusRS;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Write a description of class Renter here.
  *
@@ -12,32 +15,47 @@ public class Renter extends Serializable
     public String address;
     public String companyName; 
     public int phoneNumber;
+    // regex phone name
+    private final String REGEX_NAME = "^^[A-Z][a-zA-Z0-9_]{4,20}$";
+    private final String REGEX_PHONE = "^[0-9]{9,12}$";
     
-    public Renter(int id, String companyName){
+    public Renter(String companyName){
         super();
         this.companyName = companyName;
         this.address = "";
         this.phoneNumber = 0;
     }
     
-    public Renter(int id, String companyName, String address){
+    public Renter(String companyName, String address){
         super();
         this.companyName = companyName;
         this.address = address;
         this.phoneNumber = 0;
     }
     
-    public Renter(int id, String companyName, int phoneNumber){
+    public Renter(String companyName, int phoneNumber){
         super();
         this.companyName = companyName;
         this.address = "";
         this.phoneNumber = phoneNumber;
     }
     
-    public Renter(int id, String companyName, int phoneNumber, String address){
+    public Renter(String companyName, int phoneNumber, String address){
         super();
         this.companyName = companyName;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean validate(){
+        Pattern name_pattern = Pattern.compile(this.REGEX_NAME);
+        Pattern phone_pattern = Pattern.compile(this.REGEX_PHONE);
+        Matcher name_match = name_pattern.matcher(this.companyName);
+        String phone_string = Integer.toString(this.phoneNumber);
+        Matcher phone_match = phone_pattern.matcher(phone_string);
+        boolean name_found = name_match.find();
+        boolean phone_found = phone_match.find();
+
+        return name_found && phone_found;
     }
 }

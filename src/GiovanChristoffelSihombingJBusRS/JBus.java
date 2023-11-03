@@ -36,9 +36,12 @@ public class JBus
         // }
 
         try {
-            String filePath = "D:\\Programming\\Java\\JBus\\data\\buses.json";
+            String filePath = "D:\\Programming\\Java\\JBus\\data\\buses_CS.json";
             JsonTable<Bus> buses = new JsonTable<>(Bus.class, filePath);
-            List<Bus> filteredBus = filterByDeparture(buses, City.JAKARTA, 1, 10);
+//            List<Bus> filteredBus = filterByDeparture(buses, City.JAKARTA, 0, 3);
+//            List<Bus> filteredBus = filterByPrice(buses, 100000, 500000);
+//            List<Bus> filteredBus = filterBusId(buses, 155);
+            List<Bus> filteredBus = filterByDepartureAndArrival(buses, City.JAKARTA, City.SURABAYA, 0, 3);
             filteredBus.forEach(bus -> System.out.println(bus.toString()));
         } catch (Throwable t){
             t.printStackTrace();
@@ -144,6 +147,18 @@ public class JBus
     public static List<Bus> filterByDeparture(List<Bus> buses, City departure, int page, int pageSize){
         // return all Bus with departure == departure, and do pagination
         return Algorithm.paginate(buses, page, pageSize, b -> b.departure.city.equals(departure));
+    }
+
+    public static List<Bus> filterByPrice(List<Bus> buses, int min, int max){
+        return Algorithm.collect(buses, (Predicate<Bus>) b -> b.price.price >= min && b.price.price <= max);
+    }
+
+    public static List<Bus> filterBusId(List<Bus> buses, int id){
+        return Algorithm.collect(buses, (Predicate<Bus>)  b -> b.id == id);
+    }
+
+    public static List<Bus> filterByDepartureAndArrival(List<Bus> buses, City departure, City arrival, int page, int pageSize){
+        return Algorithm.paginate(buses, page, pageSize, b -> b.departure.city.equals(departure) && b.arrival.city.equals(arrival));
     }
 
     public static Bus createBus() {
