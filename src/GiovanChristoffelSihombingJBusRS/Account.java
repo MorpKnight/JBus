@@ -1,6 +1,9 @@
 package GiovanChristoffelSihombingJBusRS;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Write a description of class Account here.
  *
@@ -13,8 +16,10 @@ public class Account extends Serializable
     public String email;
     public String name;
     public String password;
+    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\\S{8,}$";
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$";
     
-    public Account(int id, String name, String email, String password) {
+    public Account(String name, String email, String password) {
         super();
         this.email = email;
         this.name = name;
@@ -28,5 +33,13 @@ public class Account extends Serializable
      */
     public String toString(){
         return ("Account Id: " + this.id + "\nemail: " + this.email + "\nname: " + this.name + "\npassword: " + this.password);
+    }
+
+    public boolean validate(){
+        Pattern email_pattern = Pattern.compile(REGEX_EMAIL);
+        Pattern password_pattern = Pattern.compile(REGEX_PASSWORD);
+        Matcher email_match = email_pattern.matcher(this.email);
+        Matcher password_match = password_pattern.matcher(this.password);
+        return email_match.find() && password_match.find();
     }
 }

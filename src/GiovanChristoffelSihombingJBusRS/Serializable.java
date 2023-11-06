@@ -7,22 +7,9 @@ public class Serializable {
     private static final HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
 
     protected Serializable() {
-//        Integer counter = mapCounter.get(getClass());
-//        if (counter == null) {
-//            counter = 0;
-//        }
-//        mapCounter.put(getClass(), counter + 1);
-//        this.id = counter;
-
-        Class<?> classs = getClass();
-        Integer counter = mapCounter.get(classs);
-        if(counter == null){
-            counter = 0;
-            mapCounter.put(classs, counter);
-        } else {
-            mapCounter.put(classs, counter + 1);
-        }
-
+        Integer counter = mapCounter.get(getClass());
+        counter = counter == null? 0 : counter + 1;
+        mapCounter.put(getClass(), counter);
         this.id = counter;
     }
 
@@ -34,15 +21,15 @@ public class Serializable {
         return mapCounter.put(cls, id);
     }
 
-    public boolean equals(Serializable obj) {
-        return obj != null && obj.getClass() == getClass() && obj.id == id;
+    public int compareTo(Serializable temp){
+        return ((Integer)this.id).compareTo(temp.id);
     }
 
-    public boolean compareTo(Serializable obj) {
-        return obj != null && obj.getClass() == getClass() && obj.id == id;
+    public boolean equals(Serializable temp){
+        return temp.id == this.id;
     }
 
-    public boolean equals(Object obj) {
-        return obj != null && obj.getClass() == getClass() && ((Serializable) obj).id == id;
+    public boolean equals(Object object){
+        return object instanceof Serializable && ((Serializable) object).id == this.id;
     }
 }
