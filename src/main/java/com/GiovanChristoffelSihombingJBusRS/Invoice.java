@@ -1,5 +1,7 @@
 package com.GiovanChristoffelSihombingJBusRS;
 
+import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
+
 import java.sql.Timestamp;
 
 public class Invoice extends Serializable

@@ -1,6 +1,8 @@
 package com.GiovanChristoffelSihombingJBusRS;
 
 
+import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,15 +17,18 @@ public class Account extends Serializable
     // instance variables - replace the example below with your own
     public String email;
     public String name;
+    public Renter company;
+    public double balance;
     public String password;
-    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\\S{8,}$";
-    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$";
-    
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9]+@[a-zA-Z_]+?\\.[a-zA-Z.]+[a-zA-Z]+$";
+
     public Account(String name, String email, String password) {
         super();
         this.email = email;
         this.name = name;
         this.password = password;
+        this.balance = 0;
     }
     
     /**
@@ -36,10 +41,7 @@ public class Account extends Serializable
     }
 
     public boolean validate(){
-        Pattern email_pattern = Pattern.compile(REGEX_EMAIL);
-        Pattern password_pattern = Pattern.compile(REGEX_PASSWORD);
-        Matcher email_match = email_pattern.matcher(this.email);
-        Matcher password_match = password_pattern.matcher(this.password);
-        return email_match.find() && password_match.find();
+        return this.email.matches(REGEX_EMAIL) && this.password.matches(REGEX_PASSWORD);
     }
+
 }

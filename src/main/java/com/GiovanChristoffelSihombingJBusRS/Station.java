@@ -1,6 +1,8 @@
 package com.GiovanChristoffelSihombingJBusRS;
 
 
+import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
+
 /**
  * Write a description of class Station here.
  *

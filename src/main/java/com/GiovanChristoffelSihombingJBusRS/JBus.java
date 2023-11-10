@@ -2,18 +2,11 @@ package com.GiovanChristoffelSihombingJBusRS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonDBEngine;
+
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Calendar;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-//import com.google.gson.*;
-//import com.google.gson.reflect.TypeToken;
-
 /**
  * Write a description of class JBus here.
  *
@@ -25,7 +18,9 @@ import java.io.IOException;
 public class JBus
 {
     public static void main(String[] args) throws InterruptedException {
+        JsonDBEngine.Run(JBus.class);
         SpringApplication.run(JBus.class, args);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
     }
 
     public static List<Bus> filterByDeparture(List<Bus> buses, City departure, int page, int pageSize){

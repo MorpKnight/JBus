@@ -1,8 +1,8 @@
-package com.GiovanChristoffelSihombingJBusRS;
+package com.GiovanChristoffelSihombingJBusRS.dbjson;
 
 import java.util.HashMap;
 
-public class Serializable {
+public class Serializable implements Comparable<Serializable>{
     public final int id;
     private static final HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
 

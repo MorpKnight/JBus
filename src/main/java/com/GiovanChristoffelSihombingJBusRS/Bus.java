@@ -1,5 +1,7 @@
 package com.GiovanChristoffelSihombingJBusRS;
 
+import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
