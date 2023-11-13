@@ -14,7 +14,7 @@ public class Payment extends Invoice
 {
     private int busId;
     public Timestamp departureDate;
-    public String busSeat;
+    public List<String> busSeat;
     
     /*public Payment(int id, int buyerId, int renterId, int busId, String departureDate, String busSeat){
         super(id, buyerId,  renterId);
@@ -30,15 +30,15 @@ public class Payment extends Invoice
         this.busSeat = busSeat;
     } */
     
-    public Payment(int id, int buyerId, int renterId, int busId, String busSeat, Timestamp departureDate){
-        super(id, buyerId, renterId);
+    public Payment(int buyerId, int renterId, int busId, List<String> busSeat, Timestamp departureDate){
+        super(buyerId, renterId);
         this.busId = busId;
         this.busSeat = busSeat;
         this.departureDate = new Timestamp(departureDate.getTime() + 172800000);
     }
 
-    public Payment(int id, Account buyer, Renter renter, int busId, String busSeat, Timestamp departureDate){
-        super(id, buyer, renter);
+    public Payment(Account buyer, Renter renter, int busId, List<String> busSeat, Timestamp departureDate){
+        super(buyer, renter);
         this.busId = busId;
         this.busSeat = busSeat;
         this.departureDate = new Timestamp(departureDate.getTime() + 172800000);
@@ -74,23 +74,15 @@ public class Payment extends Invoice
 //    }
 
     public static Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
-        for(Schedule schedule : bus.schedules){
-            if(schedule.isSeatAvailable(seat) && schedule.departureSchedule.equals(departureSchedule)){
-                return schedule;
-            }
-        }
+        Predicate<Schedule> checkSchedule = (s) -> departureSchedule.equals(s.departureSchedule) && s.isSeatAvailable(seat);
 
-        return null;
+        return Algorithm.find(bus.schedules, checkSchedule);
     }
 
     public static Schedule availableSchedule(Timestamp departureSchedule, List<String> seats, Bus bus){
-        for(Schedule schedule : bus.schedules){
-            if(schedule.isSeatAvailable(seats) && schedule.departureSchedule.equals(departureSchedule)){
-                return schedule;
-            }
-        }
+        Predicate<Schedule> checkSchedule = (s) -> departureSchedule.equals(s.departureSchedule) && s.isSeatAvailable(seats);
 
-        return null;
+        return Algorithm.find(bus.schedules, checkSchedule);
     }
 
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){

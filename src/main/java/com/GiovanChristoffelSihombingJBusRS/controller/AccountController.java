@@ -52,15 +52,19 @@ public class AccountController implements BasicGetController<Account>
                     @RequestParam String password
             )
     {
-        Account account = new Account(name, email, password);
-        
-        if(name.isBlank() || !account.validate() || Algorithm.<Account>exists(accountTable, b -> b.email.equals(email))){
+        try {
+            Account account = new Account(name, email, password);
+
+            if(name.isBlank() || !account.validate() || Algorithm.<Account>exists(accountTable, b -> b.email.equals(email))){
+                return new BaseResponse<>(false, "Gagal register", null);
+            }
+            
+            account.password = hashPassword(password);
+            accountTable.add(account);
+            return new BaseResponse<>(true, "Berhasil register", account);
+        } catch (Exception e) {
             return new BaseResponse<>(false, "Gagal register", null);
         }
-        
-        account.password = hashPassword(password);
-        accountTable.add(account);
-        return new BaseResponse<>(true, "Berhasil register", account);
     }
 
     @PostMapping("/login")
@@ -68,13 +72,17 @@ public class AccountController implements BasicGetController<Account>
         @RequestParam String email,
         @RequestParam String password
     ) {
-        String hashedPassword = hashPassword(password);
-        Account account = Algorithm.<Account>find(accountTable, b -> b.email.equals(email) && b.password.equals(hashedPassword));
-        if(account == null){
-            return new BaseResponse<>(false, "Akun tidak ditemukan", null);
-        }
+        try {
+            String hashedPassword = hashPassword(password);
+            Account account = Algorithm.<Account>find(accountTable, b -> b.email.equals(email) && b.password.equals(hashedPassword));
+            if(account == null){
+                return new BaseResponse<>(false, "Akun tidak ditemukan", null);
+            }
 
-        return new BaseResponse<>(true, "Berhasil login", account);
+            return new BaseResponse<>(true, "Berhasil login", account);
+        } catch (Exception e) {
+            return new BaseResponse<>(false, "Gagal login", null);
+        }
     }
 
     @PostMapping("/{id}/registerRenter")
@@ -84,14 +92,18 @@ public class AccountController implements BasicGetController<Account>
         @RequestParam String address,
         @RequestParam String phoneNumber
     ) {
-        Account account = getById(id);
-        if(account == null || account.company != null){
+        try {
+            Account account = getById(id);
+            if(account == null || account.company != null){
+                return new BaseResponse<>(false, "Gagal register renter", null);
+            }
+
+            Renter renter = new Renter(companyName, address, phoneNumber);
+            account.company = renter;
+            return new BaseResponse<>(true, "Berhasil register renter", renter);
+        } catch (Exception e) {
             return new BaseResponse<>(false, "Gagal register renter", null);
         }
-
-        Renter renter = new Renter(companyName, address, phoneNumber);
-        account.company = renter;
-        return new BaseResponse<>(true, "Berhasil register renter", renter);
     }
 
     @PostMapping("/{id}/topUp")
@@ -99,12 +111,16 @@ public class AccountController implements BasicGetController<Account>
         @PathVariable int id,
         @RequestParam double amount
     ) {
-        Account account = getById(id);
-        if(account == null || amount <= 0){
-            return new BaseResponse<>(false, "Gagal top up", account.balance);
-        }
+        try {
+            Account account = getById(id);
+            if(account == null || amount <= 0){
+                return new BaseResponse<>(false, "Gagal top up", account.balance);
+            }
 
-        account.balance += amount;
-        return new BaseResponse<>(true, "Berhasil top up", account.balance);
+            account.balance += amount;
+            return new BaseResponse<>(true, "Berhasil top up", account.balance);
+        } catch (Exception e) {
+            return new BaseResponse<>(false, "Gagal top up", null);
+        }
     }
 }
