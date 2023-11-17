@@ -6,7 +6,6 @@ import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
@@ -24,27 +23,28 @@ public class BusController implements BasicGetController<Bus> {
 
     @PostMapping("/create")
     BaseResponse<Bus> create(
-            @RequestParam int accountId,
-            @RequestParam String name,
-            @RequestParam int capacity,
-            @RequestParam List<Facility> facility,
-            @RequestParam BusType busType,
-            @RequestParam int price,
-            @RequestParam int stationDepartureId,
-            @RequestParam int stationArrivalId
+            // @RequestParam int accountId,
+            // @RequestParam String name,
+            // @RequestParam int capacity,
+            // @RequestParam List<Facility> facility,
+            // @RequestParam BusType busType,
+            // @RequestParam int price,
+            // @RequestParam int stationDepartureId,
+            // @RequestParam int stationArrivalId
+            @ModelAttribute BaseBus baseBus
     ) {
         
         try {
-            boolean isAccountIdValid = AccountController.accountTable.get(accountId) != null;
-            boolean isRenter = AccountController.accountTable.get(accountId).company != null;
-            Station dep = Algorithm.<Station>find(StationController.stationTable, s -> s.id == stationDepartureId);
-            Station arr = Algorithm.<Station>find(StationController.stationTable, s -> s.id == stationArrivalId);
+            boolean isAccountIdValid = AccountController.accountTable.get(baseBus.accountId) != null;
+            boolean isRenter = AccountController.accountTable.get(baseBus.accountId).company != null;
+            Station dep = Algorithm.<Station>find(StationController.stationTable, s -> s.id == baseBus.stationDepartureId);
+            Station arr = Algorithm.<Station>find(StationController.stationTable, s -> s.id == baseBus.stationArrivalId);
 
             if (!isAccountIdValid || !isRenter || dep == null || arr == null) {
                 return new BaseResponse<>(false, "Data tidak valid", null);
             }
 
-            Bus bus = new Bus(name, facility, new Price(price), capacity, busType, dep, arr);
+            Bus bus = new Bus(baseBus.name, baseBus.facility, new Price(baseBus.price), baseBus.capacity, baseBus.busType, dep, arr);
             busTable.add(bus);
             return new BaseResponse<>(true, "Berhasil membuat bus", bus);
         } catch (Exception e) {
@@ -52,17 +52,18 @@ public class BusController implements BasicGetController<Bus> {
         }
     }
 
-    @PostMapping("/addSchedule")
+    @PostMapping("x/addSchedule")
     BaseResponse<Bus> addSchedule(
-            @RequestParam int busId, @RequestParam String time
+            // @RequestParam int busId, @RequestParam String time
+            @ModelAttribute BaseBus baseBus
     ) {
         try {
-            Bus bus = Algorithm.<Bus>find(busTable, b -> b.id == busId);
+            Bus bus = Algorithm.<Bus>find(busTable, b -> b.id == baseBus.busId);
             if (bus == null) {
                 return new BaseResponse<>(false, "Bus tidak ditemukan", null);
             }
 
-            Timestamp timestamp = Timestamp.valueOf(time);
+            Timestamp timestamp = Timestamp.valueOf(baseBus.time);
 
             try{
                 bus.addSchedule(timestamp);

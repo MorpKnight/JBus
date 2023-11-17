@@ -1,6 +1,5 @@
 package com.GiovanChristoffelSihombingJBusRS.controller;
 
-import com.GiovanChristoffelSihombingJBusRS.Bus;
 import com.GiovanChristoffelSihombingJBusRS.City;
 import com.GiovanChristoffelSihombingJBusRS.Station;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonAutowired;
