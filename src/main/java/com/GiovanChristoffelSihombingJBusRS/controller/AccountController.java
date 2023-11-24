@@ -109,17 +109,17 @@ public class AccountController implements BasicGetController<Account> {
 
     @PostMapping("/{id}/topUp")
     BaseResponse<Double> topUp(
-            // @PathVariable int id,
-            // @RequestParam double amount
-            @ModelAttribute BaseAccount baseAccount
+             @PathVariable int id,
+             @RequestParam double amount
+//            @ModelAttribute BaseAccount baseAccount
     ) {
         try {
-            Account account = getById(baseAccount.id);
-            if (account == null || baseAccount.amount <= 0) {
-                return new BaseResponse<>(false, "Gagal top up", account.balance);
+            Account account = getById(id);
+            if (account == null || amount <= 0) {
+                return new BaseResponse<>(false, "Gagal top up", amount);
             }
 
-            account.balance += baseAccount.amount;
+            account.balance += amount;
             return new BaseResponse<>(true, "Berhasil top up", account.balance);
         } catch (Exception e) {
             return new BaseResponse<>(false, "Gagal top up", null);
