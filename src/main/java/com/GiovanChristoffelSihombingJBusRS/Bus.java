@@ -24,8 +24,9 @@ public class Bus extends Serializable {
     public int accountId;
 
     public Bus(String name, List<Facility> facilities, Price price, int capacity, BusType busType,
-            Station departure, Station arrival) {
+            Station departure, Station arrival, int accountId) {
         super();
+        this.accountId = accountId;
         this.name = name;
         this.capacity = capacity;
         this.facilities = facilities;

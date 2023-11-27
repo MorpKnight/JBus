@@ -1,6 +1,7 @@
 package com.GiovanChristoffelSihombingJBusRS.controller;
 
 import com.GiovanChristoffelSihombingJBusRS.*;
+import com.GiovanChristoffelSihombingJBusRS.controller.model.BaseBus;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonAutowired;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,8 @@ public class BusController implements BasicGetController<Bus> {
                 return new BaseResponse<>(false, "Data tidak valid", null);
             }
 
-            Bus bus = new Bus(baseBus.name, baseBus.facility, new Price(baseBus.price), baseBus.capacity, baseBus.busType, dep, arr);
+            Bus bus = new Bus(baseBus.name, baseBus.facility, new Price(baseBus.price), baseBus.capacity, baseBus.busType, dep, arr, baseBus.accountId);
+            System.out.println(baseBus.facility);
             busTable.add(bus);
             return new BaseResponse<>(true, "Berhasil membuat bus", bus);
         } catch (Exception e) {
@@ -52,7 +54,7 @@ public class BusController implements BasicGetController<Bus> {
         }
     }
 
-    @PostMapping("x/addSchedule")
+    @PostMapping("/addSchedule")
     BaseResponse<Bus> addSchedule(
             // @RequestParam int busId, @RequestParam String time
             @ModelAttribute BaseBus baseBus
@@ -75,5 +77,12 @@ public class BusController implements BasicGetController<Bus> {
         } catch (Exception e) {
             return new BaseResponse<>(false, "Gagal melakukan operasi", null);
         }
+    }
+
+    @GetMapping("/getMyBus")
+    public List<Bus> getMyBus(
+            @RequestParam int accountId
+    ) {
+        return Algorithm.<Bus>collect(getJsonTable(), b -> b.accountId == accountId);
     }
 }

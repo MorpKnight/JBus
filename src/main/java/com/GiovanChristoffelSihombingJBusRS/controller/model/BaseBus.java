@@ -1,4 +1,4 @@
-package com.GiovanChristoffelSihombingJBusRS.controller;
+package com.GiovanChristoffelSihombingJBusRS.controller.model;
 
 import com.GiovanChristoffelSihombingJBusRS.BusType;
 import com.GiovanChristoffelSihombingJBusRS.Facility;
