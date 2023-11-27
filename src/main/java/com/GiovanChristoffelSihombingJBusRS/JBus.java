@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonDBEngine;
 
-import java.sql.Timestamp;
 import java.util.List;
 /**
  * Write a description of class JBus here.
