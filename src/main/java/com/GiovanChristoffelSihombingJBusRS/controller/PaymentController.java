@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * The PaymentController class is a Java class that handles payment-related operations such as making a
+ * booking, accepting a payment, and canceling a payment.
+ */
 @RestController
 @RequestMapping("/payment")
 public class PaymentController implements BasicGetController<Payment> {
@@ -16,20 +20,34 @@ public class PaymentController implements BasicGetController<Payment> {
     @JsonAutowired(value = Payment.class, filepath = "src/main/java/com/GiovanChristoffelSihombingJBusRS/json/payment.json")
     public static JsonTable<Payment> paymentTable;
 
+    /**
+     * The function returns a JsonTable object containing Payment objects.
+     * 
+     * @return A JsonTable object containing Payment objects is being returned.
+     */
     public JsonTable<Payment> getJsonTable(){
         return paymentTable;
     }
 
+    /**
+     * The function returns the string "payment page" when the GET request is made to the index
+     * endpoint.
+     * 
+     * @return The string "payment page" is being returned.
+     */
     @GetMapping
     String index() { return "payment page"; }
 
+    /**
+     * The `makeBooking` function in the Java code snippet is responsible for creating a booking for a
+     * bus based on the provided payment details.
+     * 
+     * @param basePayment The basePayment parameter is an object of type BasePayment, which contains
+     * the following properties:
+     * @return The method is returning a `BaseResponse` object with the type parameter `Payment`.
+     */
     @PostMapping("/makeBooking")
     BaseResponse<Payment> makeBooking(
-//            @RequestParam int buyerId,
-//            @RequestParam int renterId,
-//            @RequestParam int busId,
-//            @RequestParam List<String> busSeats,
-//            @RequestParam String departureDate
             @ModelAttribute BasePayment basePayment
             ) {
         try {
@@ -52,6 +70,14 @@ public class PaymentController implements BasicGetController<Payment> {
         }
     }
 
+    /**
+     * The above function accepts a payment by updating its status to "SUCCESS" and returns a response
+     * indicating whether the operation was successful or not.
+     * 
+     * @param id The "id" parameter is an integer that represents the ID of the payment that needs to
+     * be accepted.
+     * @return The method is returning a `BaseResponse<Payment>`.
+     */
     @PostMapping("/{id}/accept")
     public BaseResponse<Payment> accept(@PathVariable int id){
         try{
@@ -67,6 +93,13 @@ public class PaymentController implements BasicGetController<Payment> {
         }
     }
 
+    /**
+     * The above function cancels a payment by updating its status to "FAILED".
+     * 
+     * @param id The "id" parameter is an integer that represents the ID of the payment that needs to
+     * be canceled.
+     * @return The method is returning a `BaseResponse<Payment>`.
+     */
     @PostMapping("/{id}/cancel")
     public BaseResponse<Payment> cancel (@PathVariable int id){
         try {

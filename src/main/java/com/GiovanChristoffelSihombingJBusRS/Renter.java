@@ -7,10 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Write a description of class Renter here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * The Renter class represents a renter with properties such as address, company name, and phone
+ * number, and provides a method to validate the company name and phone number.
  */
 public class Renter extends Serializable
 {
@@ -42,6 +40,12 @@ public class Renter extends Serializable
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * The function validates whether the company name and phone number match the specified regular
+     * expressions.
+     * 
+     * @return The method is returning a boolean value.
+     */
     public boolean validate(){
         Pattern name_pattern = Pattern.compile(REGEX_NAME);
         Pattern phone_pattern = Pattern.compile(REGEX_PHONE);

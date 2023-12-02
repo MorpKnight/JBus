@@ -3,10 +3,8 @@ package com.GiovanChristoffelSihombingJBusRS;
 import java.util.ArrayList;
 
 /**
- * Write a description of class Validate here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * The Validate class provides a method to filter an array of Price objects based on a given value and
+ * a boolean flag.
  */
 public class Validate
 {

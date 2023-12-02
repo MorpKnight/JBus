@@ -5,6 +5,10 @@ import com.GiovanChristoffelSihombingJBusRS.Facility;
 
 import java.util.List;
 
+/**
+ * The BaseBus class represents a bus with various properties such as name, time, capacity, price, and
+ * facilities.
+ */
 public class BaseBus {
     public String name, time;
     public int accountId, capacity, price, stationDepartureId, stationArrivalId, busId;
@@ -21,5 +25,5 @@ public class BaseBus {
         this.stationArrivalId = stationArrivalId;
         this.facility = facility;
         this.busType = busType;
-    }
+    }    
 }

@@ -8,10 +8,8 @@ import java.sql.Timestamp;
 // import java.text.SimpleDateFormat;
 
 /**
- * Write a description of class Bus here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * The Bus class represents a bus with various properties such as capacity, facilities, name, price,
+ * departure and arrival stations, bus type, schedules, and account ID.
  */
 public class Bus extends Serializable {
     public int capacity;
@@ -38,12 +36,12 @@ public class Bus extends Serializable {
     }
 
     /**
-     * Fungsi toString() mengembalikan string yang merepresentasikan objek bus.
+     * The toString() function returns a string representation of a Bus object, including its id, name,
+     * capacity, facilities, price, departure and arrival cities, and bus type.
      * 
-     * @return toString() methode mengembalikan string yang merepresentasikan objek
-     *         bus, termasuk
-     *         id bus, nama, kapasitas, fasilitas, harga, kota, stasiun
-     *         keberangkatan, stasiun kedatangan, dan tipe bus.
+     * @return The toString() method is returning a string representation of a bus object. It includes
+     * information such as the bus id, name, capacity, facilities, price, departure city, arrival city,
+     * and bus type.
      */
     public String toString() {
         return ("Bus Id: " + this.id + "\nname: " + this.name + "\ncapacity: " + this.capacity + "\nfacility: "
@@ -51,6 +49,13 @@ public class Bus extends Serializable {
                 + this.departure.city + "\narrival: " + this.arrival.city + "\nbusType: " + this.busType + "\n");
     }
 
+    /**
+     * The function `addSchedule` adds a new schedule to a list of schedules, checking for duplicates
+     * before adding.
+     * 
+     * @param calendar The parameter "calendar" is of type "Timestamp" and represents the departure
+     * schedule that needs to be added to the existing schedules.
+     */
     public void addSchedule(Timestamp calendar){
         try {
             for(Schedule existSchedule: this.schedules){
@@ -63,6 +68,5 @@ public class Bus extends Serializable {
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
-//        this.schedules.add(new Schedule(calendar, this.capacity));
     }
 }

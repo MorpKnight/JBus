@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The Algorithm class provides various methods for searching, filtering, and manipulating arrays and
+ * iterable collections in Java.
+ */
 public class Algorithm {
     private Algorithm(){
 

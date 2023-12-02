@@ -1,5 +1,9 @@
 package com.GiovanChristoffelSihombingJBusRS.controller;
 
+/**
+ * The BaseResponse class is a generic class that represents a response with a success flag, a message,
+ * and a payload of any type.
+ */
 public class BaseResponse<T> {
     public boolean success;
     public String message;

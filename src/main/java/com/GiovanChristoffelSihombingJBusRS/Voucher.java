@@ -4,10 +4,7 @@ package com.GiovanChristoffelSihombingJBusRS;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
 
 /**
- * Write a description of class Voucher here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * The Voucher class represents a voucher that can be used to apply discounts or rebates to a price.
  */
 public class Voucher extends Serializable
 {

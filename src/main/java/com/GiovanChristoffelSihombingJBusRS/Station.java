@@ -4,10 +4,7 @@ package com.GiovanChristoffelSihombingJBusRS;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
 
 /**
- * Write a description of class Station here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * The Station class represents a station with properties such as city, station name, and address.
  */
 public class Station extends Serializable
 {

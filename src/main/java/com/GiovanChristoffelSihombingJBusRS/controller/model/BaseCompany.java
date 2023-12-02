@@ -1,5 +1,9 @@
 package com.GiovanChristoffelSihombingJBusRS.controller.model;
 
+/**
+ * The BaseCompany class represents a company with properties such as companyName, phoneNumber, and
+ * address.
+ */
 public class BaseCompany {
     public String companyName, phoneNumber, address;
 

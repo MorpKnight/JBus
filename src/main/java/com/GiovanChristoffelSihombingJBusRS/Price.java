@@ -1,10 +1,7 @@
 package com.GiovanChristoffelSihombingJBusRS;
 
 /**
- * Write a description of class Price here.
- *
- * @author Giovan Christoffel Sihombing
- * @version (a version number or a date)
+ * The Price class represents a price with an optional rebate value.
  */
 public class Price {
     public double rebate;
@@ -17,22 +14,17 @@ public class Price {
         this.rebate = 0;
     }
 
-    // public Price(double _price, int _discount) {
-    //     this.price = _price;
-    //     this.discount = _discount;
-    //     this.rebate = 0;
-    // }
-
     public Price(double _price, double _rebate){
         this.price = _price;
         this.rebate = _rebate;
         // this.discount = 0;
     }
-    
+
     /**
      * The toString() function returns a string representation of the price and rebate values.
      * 
-     * @return The method is returning a string that contains the price and rebate values.
+     * @return The toString() method is returning a string representation of the object's price and
+     * rebate values.
      */
     public String toString(){
         return ("price: " + this.price + "\nrebate: " + this.rebate);

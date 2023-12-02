@@ -9,9 +9,14 @@ import com.GiovanChristoffelSihombingJBusRS.dbjson.Serializable;
  * @author (your name)
  * @version (a version number or a date)
  */
+
+/**
+ * The Account class represents a user account with properties such as email, name, company, balance,
+ * and password, along with regular expressions for password and email validation.
+ */
 public class Account extends Serializable
 {
-    // instance variables - replace the example below with your own
+    
     public String email;
     public String name;
     public Renter company;
@@ -29,14 +34,21 @@ public class Account extends Serializable
     }
     
     /**
-     * The toString() function mengembalikan string yang merepresentasikan objek account.
+     * The toString() function returns a string representation of an account object, including its id,
+     * email, name, and password.
      * 
-     * @return toString() method mengembalikan string yang merepresentasikan objek account, termasuk id akun, email, nama, dan password.
+     * @return The toString() method is returning a string representation of an account object. It
+     * includes the account id, email, name, and password.
      */
     public String toString(){
         return ("Account Id: " + this.id + "\nemail: " + this.email + "\nname: " + this.name + "\npassword: " + this.password);
     }
 
+    /**
+     * The function validates if the email and password match the specified regular expressions.
+     * 
+     * @return The method is returning a boolean value.
+     */
     public boolean validate(){
         return this.email.matches(REGEX_EMAIL) && this.password.matches(REGEX_PASSWORD);
     }
