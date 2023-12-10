@@ -57,6 +57,44 @@ public class StationController implements BasicGetController<Station> {
         }
     }
 
+    @DeleteMapping("/delete")
+    public BaseResponse<Station> deleteStation(@RequestParam int id) {
+        try {
+            Station station = stationTable.get(id);
+            if (station == null) {
+                return new BaseResponse<>(false, "Station not found", null);
+            }
+            stationTable.remove(station);
+            return new BaseResponse<>(true, "Station deleted successfully", station);
+        } catch (Exception e) {
+            return new BaseResponse<>(false, "An error occurred while deleting the station", null);
+        }
+    }
+
+    @PutMapping("/update")
+    public BaseResponse<Station> updateStation(@RequestParam int id, @ModelAttribute BaseStation baseStation) {
+        try {
+            Station station = stationTable.get(id);
+            if (station == null) {
+                return new BaseResponse<>(false, "Station not found", null);
+            }
+            if (!baseStation.stationName.isBlank()) {
+                station.stationName = baseStation.stationName;
+            }
+            if (!baseStation.city.isBlank()) {
+                station.city = City.valueOf(baseStation.city.toUpperCase());
+            }
+            if (!baseStation.address.isBlank()) {
+                station.address = baseStation.address;
+            }
+            return new BaseResponse<>(true, "Station updated successfully", station);
+        } catch (IllegalArgumentException e) {
+            return new BaseResponse<>(false, "Invalid city value", null);
+        } catch (Exception e) {
+            return new BaseResponse<>(false, "An error occurred while updating the station", null);
+        }
+    }
+
     /**
      * The function returns a list of all stations.
      * 

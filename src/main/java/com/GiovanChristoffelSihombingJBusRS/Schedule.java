@@ -27,10 +27,18 @@ public class Schedule
      * @param seat The parameter "seat" represents the total number of seats available.
      */
     private void initializeSeatAvailability(int seat){
+        LinkedHashMap<String, Boolean> seatAvailability = new LinkedHashMap<String, Boolean>();
         for (int i = 1; i <= seat; i++) {
             String sn = i < 10 ? "0"+i : ""+i;
             seatAvailability.put("RS" + sn, true);
         }
+        this.seatAvailability = seatAvailability;
+
+
+        // for (int i = 1; i <= seat; i++) {
+        //     String sn = i < 10 ? "0"+i : ""+i;
+        //     seatAvailability.put("RS" + sn, true);
+        // }
     }
 
     /**
@@ -40,7 +48,7 @@ public class Schedule
      * @return The method is returning a boolean value.
      */
     public boolean isSeatAvailable(String seat){
-        return seatAvailability.containsKey(seat) && seatAvailability.get(seat);
+        return this.seatAvailability.get(seat) && this.seatAvailability.containsKey(seat);
     }
 
     /**
@@ -51,10 +59,10 @@ public class Schedule
      */
     public boolean isSeatAvailable(List<String> seats){
         for(String seat: seats){
-            isSeatAvailable(seat);
+            if(!isSeatAvailable(seat)) return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -63,8 +71,8 @@ public class Schedule
      * @param seat The seat parameter is a String that represents the seat that needs to be booked.
      */
     public void bookSeat(String seat){
-        if(seatAvailability.containsKey(seat)){
-            seatAvailability.put(seat, false);
+        if(isSeatAvailable(seat)){
+            this.seatAvailability.replace(seat, false);
         }
     }
 

@@ -60,7 +60,8 @@ public class AccountController implements BasicGetController<Account> {
     }
 
     /**
-     * The above function is a GET request handler that returns the string "account page".
+     * The above function is a GET request handler that returns the string "account
+     * page".
      * 
      * @return The string "account page" is being returned.
      */
@@ -70,12 +71,15 @@ public class AccountController implements BasicGetController<Account> {
     }
 
     /**
-     * The function handles the registration process by creating a new Account object, validating the
+     * The function handles the registration process by creating a new Account
+     * object, validating the
      * account details, and adding the account to the accountTable.
      * 
-     * @param baseAccount The `baseAccount` parameter is an instance of the `BaseAccountRegister`
-     * class. It is annotated with `@ModelAttribute`, which means that the values for its properties
-     * will be obtained from the request parameters or form data.
+     * @param baseAccount The `baseAccount` parameter is an instance of the
+     *                    `BaseAccountRegister`
+     *                    class. It is annotated with `@ModelAttribute`, which means
+     *                    that the values for its properties
+     *                    will be obtained from the request parameters or form data.
      * @return The method is returning a `BaseResponse<Account>`.
      */
     @PostMapping("/register")
@@ -98,12 +102,16 @@ public class AccountController implements BasicGetController<Account> {
     }
 
     /**
-     * The function handles the login process by checking the provided email and password against a
-     * hashed password in the account table and returns a response indicating whether the login was
+     * The function handles the login process by checking the provided email and
+     * password against a
+     * hashed password in the account table and returns a response indicating
+     * whether the login was
      * successful or not.
      * 
-     * @param baseAccount The `baseAccount` parameter is an object of type `BaseAccountLogin` which is
-     * used to represent the login credentials of a user. It contains the following properties:
+     * @param baseAccount The `baseAccount` parameter is an object of type
+     *                    `BaseAccountLogin` which is
+     *                    used to represent the login credentials of a user. It
+     *                    contains the following properties:
      * @return The method is returning a BaseResponse object.
      */
     @PostMapping("/login")
@@ -124,14 +132,18 @@ public class AccountController implements BasicGetController<Account> {
     }
 
     /**
-     * This function registers a renter for a specific account by creating a new Renter object and
+     * This function registers a renter for a specific account by creating a new
+     * Renter object and
      * assigning it to the account's company field.
      * 
-     * @param id The id parameter is an integer that represents the account id. It is used to identify
-     * the account for which the renter is being registered.
-     * @param baseCompany The `baseCompany` parameter is an object of type `BaseCompany` which is used
-     * to store the details of the company being registered as a renter. It contains the following
-     * properties:
+     * @param id          The id parameter is an integer that represents the account
+     *                    id. It is used to identify
+     *                    the account for which the renter is being registered.
+     * @param baseCompany The `baseCompany` parameter is an object of type
+     *                    `BaseCompany` which is used
+     *                    to store the details of the company being registered as a
+     *                    renter. It contains the following
+     *                    properties:
      * @return The method is returning a `BaseResponse<Renter>`.
      */
     @PostMapping("/{id}/registerRenter")
@@ -155,13 +167,18 @@ public class AccountController implements BasicGetController<Account> {
     }
 
     /**
-     * The `topUp` function in Java is used to add a specified amount to the balance of an account
+     * The `topUp` function in Java is used to add a specified amount to the balance
+     * of an account
      * identified by its ID.
      * 
-     * @param id The id parameter is a path variable that represents the account id. It is used to
-     * identify the account for which the top-up operation is being performed.
-     * @param baseAccount The `baseAccount` parameter is a model attribute that represents the account
-     * details for the top-up operation. It contains the following properties:
+     * @param id          The id parameter is a path variable that represents the
+     *                    account id. It is used to
+     *                    identify the account for which the top-up operation is
+     *                    being performed.
+     * @param baseAccount The `baseAccount` parameter is a model attribute that
+     *                    represents the account
+     *                    details for the top-up operation. It contains the
+     *                    following properties:
      * @return The method is returning a `BaseResponse<Double>`.
      */
     @PostMapping("/{id}/topUp")
@@ -180,5 +197,12 @@ public class AccountController implements BasicGetController<Account> {
         } catch (Exception e) {
             return new BaseResponse<>(false, "Gagal top up", null);
         }
+    }
+
+    @GetMapping("/getAccountDetails")
+    BaseResponse<Account> getAccount(
+            @ModelAttribute BaseAccountLogin baseAccount) {
+        Account account = Algorithm.<Account>find(accountTable, b -> b.email.equals(baseAccount.email));
+        return new BaseResponse<>(true, "Berhasil mendapatkan akun", account);
     }
 }

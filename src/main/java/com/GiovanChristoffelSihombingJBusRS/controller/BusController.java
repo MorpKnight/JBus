@@ -5,6 +5,9 @@ import com.GiovanChristoffelSihombingJBusRS.controller.model.BaseAddBusSchedule;
 import com.GiovanChristoffelSihombingJBusRS.controller.model.BaseBus;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonAutowired;
 import com.GiovanChristoffelSihombingJBusRS.dbjson.JsonTable;
+
+import retrofit2.http.Body;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -80,13 +83,20 @@ public class BusController implements BasicGetController<Bus> {
      */
     @PostMapping("/delete")
     BaseResponse<Bus> delete(
-        @RequestBody int id
+        @ModelAttribute BaseBus baseBus
     ) {
         try {
-            Bus bus = Algorithm.<Bus>find(busTable, b -> b.id == id);
+            Bus bus = Algorithm.<Bus>find(busTable, b -> b.id == baseBus.busId && b.accountId == baseBus.accountId);
+            if (bus == null) {
+                return new BaseResponse<>(false, "Bus tidak ditemukan", null);
+            }
+            
+            
+
+            busTable.remove(bus);
             return new BaseResponse<>(true, "Berhasil menghapus bus", bus);
         } catch (Exception e) {
-            return new BaseResponse<>(false, "Gagal menghapus bus", null);
+            return new BaseResponse<>(false, e.getMessage(), null);
         }
     }
 

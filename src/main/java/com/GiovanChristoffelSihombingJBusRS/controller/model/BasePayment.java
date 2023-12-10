@@ -12,7 +12,7 @@ public class BasePayment {
     public String departureDate;
 
     public BasePayment(int buyerId, int renterId, int busId, List<String> busSeats, String departureDate){
-        this.busId = buyerId;
+        this.buyerId = buyerId;
         this.renterId = renterId;
         this.busId = busId;
         this.busSeats = busSeats;

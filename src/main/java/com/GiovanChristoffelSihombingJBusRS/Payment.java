@@ -69,9 +69,12 @@ public class Payment extends Invoice
      * @return The method is returning a Schedule object.
      */
     public static Schedule availableSchedule(Timestamp departureSchedule, String seat, Bus bus){
-        Predicate<Schedule> checkSchedule = (s) -> departureSchedule.equals(s.departureSchedule) && s.isSeatAvailable(seat);
-
-        return Algorithm.find(bus.schedules, checkSchedule);
+        for(Schedule s : bus.schedules){
+            if(s.departureSchedule.equals(departureSchedule) && s.isSeatAvailable(seat)){
+                return s;
+            }
+        }
+        return null;
     }
 
     /**
@@ -87,9 +90,12 @@ public class Payment extends Invoice
      * @return The method is returning a Schedule object.
      */
     public static Schedule availableSchedule(Timestamp departureSchedule, List<String> seats, Bus bus){
-        Predicate<Schedule> checkSchedule = (s) -> departureSchedule.equals(s.departureSchedule) && s.isSeatAvailable(seats);
-
-        return Algorithm.find(bus.schedules, checkSchedule);
+        for(Schedule s : bus.schedules) {
+            if(s.departureSchedule.equals(departureSchedule) && s.isSeatAvailable(seats)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     /**
@@ -104,14 +110,21 @@ public class Payment extends Invoice
      * made, and false otherwise.
      */
     public static boolean makeBooking(Timestamp departureSchedule, String seat, Bus bus){
-        for(Schedule sch : bus.schedules){
-            if(sch.departureSchedule.equals(departureSchedule) && sch.isSeatAvailable(seat)){
-                sch.bookSeat(seat);
-                return true;
-            }
+        Schedule availableSchedule = availableSchedule(departureSchedule, seat, bus);
+        if(availableSchedule!=null){
+            availableSchedule.bookSeat(seat);
+            return true;
         }
-
         return false;
+
+        // for(Schedule sch : bus.schedules){
+        //     if(sch.departureSchedule.equals(departureSchedule) && sch.isSeatAvailable(seat)){
+        //         sch.bookSeat(seat);
+        //         return true;
+        //     }
+        // }
+
+        // return false;
     }
 
     /**
@@ -126,12 +139,21 @@ public class Payment extends Invoice
      * @return The method is returning a boolean value.
      */
     public static boolean makeBooking(Timestamp departureSchedule, List<String> seats, Bus bus){
-        for(String seat : seats){
-            if(!makeBooking(departureSchedule, seat, bus)){
-                return false;
+        Schedule availableSchedule = availableSchedule(departureSchedule, seats, bus);
+        if (availableSchedule != null) {
+            if (availableSchedule.isSeatAvailable(seats)) {
+                availableSchedule.bookSeat(seats);
+                return true;
             }
         }
+        return false;
 
-        return true;
+        // for(String seat : seats){
+        //     if(!makeBooking(departureSchedule, seat, bus)){
+        //         return false;
+        //     }
+        // }
+
+        // return true;
     }
 }
