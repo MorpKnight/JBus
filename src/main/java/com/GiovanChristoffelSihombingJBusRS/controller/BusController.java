@@ -213,6 +213,9 @@ public class BusController implements BasicGetController<Bus> {
     }
 }
 
+/**
+ * The "deleteBus" class represents a request to delete a specific bus associated with a given account.
+ */
 class deleteBus {
     public int accountId, busId;
 

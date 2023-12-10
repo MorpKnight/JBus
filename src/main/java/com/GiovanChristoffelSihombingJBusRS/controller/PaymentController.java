@@ -161,11 +161,22 @@ public class PaymentController implements BasicGetController<Payment> {
         }
     }
 
+    /**
+     * The function returns a list of all payments.
+     * 
+     * @return The method is returning a List of Payment objects.
+     */
     @GetMapping("/getAllPayment")
     public List<Payment> getAllPayment() {
         return getJsonTable();
     }
 
+    /**
+     * The function "getMyPayments" returns a list of payments for a given buyer ID.
+     * 
+     * @param id The "id" parameter is an integer that represents the buyer's ID.
+     * @return The method is returning a list of Payment objects.
+     */
     @GetMapping("/getMyPayment/{id}")
     public List<Payment> getMyPayments(@PathVariable int id) {
         return Algorithm.<Payment>collect(PaymentController.paymentTable, pymnt -> pymnt.buyerId == id);

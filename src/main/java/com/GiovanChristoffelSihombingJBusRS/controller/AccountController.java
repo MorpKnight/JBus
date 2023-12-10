@@ -199,6 +199,13 @@ public class AccountController implements BasicGetController<Account> {
         }
     }
 
+    /**
+     * The function "getAccount" retrieves account details based on the provided email address.
+     * 
+     * @param baseAccount The `baseAccount` parameter is an instance of the `BaseAccountLogin` class.
+     * It is used to provide the email of the account for which the details are to be retrieved.
+     * @return The method is returning a BaseResponse object with the type parameter Account.
+     */
     @GetMapping("/getAccountDetails")
     BaseResponse<Account> getAccount(
             @ModelAttribute BaseAccountLogin baseAccount) {
