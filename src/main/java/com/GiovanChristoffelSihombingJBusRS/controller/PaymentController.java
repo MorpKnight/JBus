@@ -165,4 +165,9 @@ public class PaymentController implements BasicGetController<Payment> {
     public List<Payment> getAllPayment() {
         return getJsonTable();
     }
+
+    @GetMapping("/getMyPayment/{id}")
+    public List<Payment> getMyPayments(@PathVariable int id) {
+        return Algorithm.<Payment>collect(PaymentController.paymentTable, pymnt -> pymnt.buyerId == id);
+    }
 }
